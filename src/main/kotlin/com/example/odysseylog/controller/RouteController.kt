@@ -1,5 +1,6 @@
 package com.example.odysseylog.controller
 
+import com.example.odysseylog.dto.RouteRequest
 import com.example.odysseylog.dto.RouteResponse
 import com.example.odysseylog.service.RouteService
 import io.swagger.v3.oas.annotations.Operation
@@ -24,5 +25,23 @@ class RouteController(private val routeService: RouteService) {
     ): ResponseEntity<RouteResponse> {
         val route = routeService.getRoute(id.toLong())
         return ResponseEntity.ok(route)
+    }
+
+    @PostMapping("/create")
+    fun createRoute(
+        @Parameter(description = "create new route", required = true)
+        @RequestBody routeRequest: RouteRequest
+    ): ResponseEntity<String> {
+        routeService.createRoute(routeRequest)
+        return ResponseEntity.ok("Route created")
+    }
+
+    @DeleteMapping("/{id}")
+    fun deleteRoute(
+        @Parameter(description = "delete route", required = true)
+        @PathVariable id: String,
+    ): ResponseEntity<String> {
+        routeService.deleteRoute(id.toLong())
+        return ResponseEntity.ok("Route deleted")
     }
 }
