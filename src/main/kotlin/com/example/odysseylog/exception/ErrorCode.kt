@@ -11,6 +11,7 @@ enum class ErrorCode(val status: Int, val message: String) {
     ROUTE_NOT_FOUND(1001, "Route with id %s not found"),
     ROUTE_CREATION_FAILED(1002, "Route creation failed"),
     ROUTE_UPDATE_FAILED(1003, "Route update failed"),
+    ROUTE_ID_NULL(1004, "Route id is null"),
 
     API_CALL_FAILED(10001, "API Call Failed")
 }

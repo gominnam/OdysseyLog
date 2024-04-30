@@ -43,7 +43,7 @@ class RouteServiceImpl(
     }
 
     private fun findRouteById(id: Long?): Route {
-        return routeRepository.findById(id ?: throw CustomException(ErrorCode.BAD_REQUEST, "Route id is null"))
+        return routeRepository.findById(id ?: throw CustomException(ErrorCode.ROUTE_ID_NULL))
             .orElseThrow { CustomException(ErrorCode.ROUTE_NOT_FOUND, id) }
     }
 
@@ -52,12 +52,13 @@ class RouteServiceImpl(
             val savedRoute = routeRepository.save(route)
             RouteResponse.fromRoute(savedRoute)
         } catch (e: Exception) {
-            throw CustomException(errorCode, route.id ?: throw IllegalArgumentException("Route id is null"))
+            throw CustomException(errorCode, route.id ?: throw CustomException(ErrorCode.ROUTE_ID_NULL))
         }
     }
 
     private fun updateRouteDetails(routeRequest: RouteRequest, existingRoute: Route): Route {
         modelMapper.map(routeRequest, existingRoute)
+        existingRoute.title = routeRequest.title //todo: fix modelmapper issue
         return existingRoute
     }
 }
