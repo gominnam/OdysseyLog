@@ -27,13 +27,13 @@ class RouteController(private val routeService: RouteService) {
         return ResponseEntity.ok(route)
     }
 
-    @PostMapping("/create")
-    fun createRoute(
-        @Parameter(description = "create new route", required = true)
+    @PostMapping("/{id}")
+    fun updateRoute(
+        @Parameter(description = "update route", required = true)
         @RequestBody routeRequest: RouteRequest
     ): ResponseEntity<String> {
-        routeService.createRoute(routeRequest)
-        return ResponseEntity.ok("Route created")
+        routeService.updateRoute(routeRequest)
+        return ResponseEntity.ok("Route updated")
     }
 
     @DeleteMapping("/{id}")
@@ -43,5 +43,14 @@ class RouteController(private val routeService: RouteService) {
     ): ResponseEntity<String> {
         routeService.deleteRoute(id.toLong())
         return ResponseEntity.ok("Route deleted")
+    }
+
+    @PostMapping("/create")
+    fun createRoute(
+        @Parameter(description = "create new route", required = true)
+        @RequestBody routeRequest: RouteRequest
+    ): ResponseEntity<String> {
+        routeService.createRoute(routeRequest)
+        return ResponseEntity.ok("Route created")
     }
 }
