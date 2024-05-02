@@ -21,9 +21,9 @@ class RouteController(private val routeService: RouteService) {
     @GetMapping("/{id}")
     fun getRoute(
         @Parameter(description = "ID of the route to be obtained.", required = true)
-        @PathVariable id: String,
+        @PathVariable id: Long,
     ): ResponseEntity<RouteResponse> {
-        val route = routeService.getRoute(id.toLong())
+        val route = routeService.getRoute(id)
         return ResponseEntity.ok(route)
     }
 
@@ -39,9 +39,9 @@ class RouteController(private val routeService: RouteService) {
     @DeleteMapping("/{id}")
     fun deleteRoute(
         @Parameter(description = "delete route", required = true)
-        @PathVariable id: String,
+        @PathVariable id: Long,
     ): ResponseEntity<String> {
-        routeService.deleteRoute(id.toLong())
+        routeService.deleteRoute(id)
         return ResponseEntity.ok("Route deleted")
     }
 
