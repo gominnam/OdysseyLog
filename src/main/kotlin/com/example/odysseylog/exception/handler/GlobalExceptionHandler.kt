@@ -27,6 +27,6 @@ class GlobalExceptionHandler {
             "error" to error,
             "message" to message
         )
-        return ResponseEntity(body, HttpStatus.valueOf(status))
+        return ResponseEntity(body, org.springframework.http.HttpStatus.valueOf(500))
     }
 }

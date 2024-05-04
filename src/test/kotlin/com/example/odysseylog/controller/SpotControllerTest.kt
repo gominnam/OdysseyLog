@@ -15,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.FilterType
-import org.springframework.context.annotation.Import
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext
 import org.springframework.http.MediaType
 import org.springframework.mock.web.MockHttpServletResponse
@@ -25,7 +24,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.time.LocalDateTime
 
-//@WebMvcTest(SpotController::class)
 @WebMvcTest(controllers = [SpotController::class], includeFilters = [
     ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = [GlobalExceptionHandler::class])
 ])
@@ -61,6 +59,25 @@ class SpotControllerTest {
         // then
         val actualSpot = objectMapper.readValue(result.contentAsString, SpotResponse::class.java)
         assertEquals(expectedSpot, actualSpot)
+    }
+
+    @Test
+    fun `when getSpot is called with invalid id, then return Exception Not Found`() {
+        // given
+        val id = 1L
+        `when`(spotService.getSpot(id)).thenThrow(CustomException(ErrorCode.SPOT_NOT_FOUND, id))
+
+        // when
+        val result = mvc.perform(
+            get("/api/spots/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andReturn()
+
+        // then
+        assertEquals(500, result.response.status)
+        val responseBody = objectMapper.readValue(result.response.contentAsString, Map::class.java)
+        assertEquals(2001, responseBody["status"])
+        assertEquals("Spot with id %s not found", responseBody["message"])
     }
 
     @Test
