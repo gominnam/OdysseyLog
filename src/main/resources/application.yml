@@ -7,5 +7,5 @@ aws:
   access-key-id: ${AWS_ACCESS_KEY_ID}
   secret-access-key: ${AWS_SECRET_ACCESS_KEY}
   s3:
-    bucket: odessey-bucket
+    bucket-name: odessey-bucket
     region: ap-notheast-2

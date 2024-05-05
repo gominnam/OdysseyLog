@@ -26,6 +26,9 @@ class SpotServiceImpl(
         return saveSpot(spot, ErrorCode.SPOT_CREATION_FAILED)
     }
 
+    override fun getSpotEntity(id: Long): Spot = spotRepository.findById(id)
+        .orElseThrow { CustomException(ErrorCode.SPOT_NOT_FOUND, id) }
+
     fun saveSpot(spot: Spot, errorCode: ErrorCode): SpotResponse {
         try {
             val savedSpot = spotRepository.save(spot)

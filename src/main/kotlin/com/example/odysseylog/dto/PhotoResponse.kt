@@ -18,5 +18,9 @@ data class PhotoResponse(
                 updatedAt = photo.updatedAt ?: LocalDateTime.now()
             )
         }
+
+        fun fromPhotos(photos: List<Photo>): List<PhotoResponse> {
+            return photos.map { fromPhoto(it) }
+        }
     }
 }
