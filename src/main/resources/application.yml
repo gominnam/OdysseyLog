@@ -1,1 +1,11 @@
-spring.application.name=OdysseyLog
+spring:
+  profiles:
+    active: dev
+
+
+aws:
+  access-key-id: ${AWS_ACCESS_KEY_ID}
+  secret-access-key: ${AWS_SECRET_ACCESS_KEY}
+  s3:
+    bucket: odessey-bucket
+    region: ap-notheast-2

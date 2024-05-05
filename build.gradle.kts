@@ -47,6 +47,7 @@ dependencies {
     // util
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2") // swagger
     implementation("org.modelmapper:modelmapper:2.4.4")
+    implementation("com.amazonaws:aws-java-sdk-s3:1.12.710")
 
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
