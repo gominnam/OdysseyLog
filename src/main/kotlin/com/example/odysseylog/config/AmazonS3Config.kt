@@ -7,6 +7,7 @@ import software.amazon.awssdk.auth.credentials.AwsBasicCredentials
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider
 import software.amazon.awssdk.regions.Region
 import software.amazon.awssdk.services.s3.S3Client
+import software.amazon.awssdk.services.s3.presigner.S3Presigner
 
 @Configuration
 class AmazonS3Config {
@@ -23,6 +24,15 @@ class AmazonS3Config {
     fun s3Client(): S3Client {
         val awsCredentials = AwsBasicCredentials.create(accessKeyId, secretAccessKey)
         return S3Client.builder()
+            .region(Region.of(region))
+            .credentialsProvider(StaticCredentialsProvider.create(awsCredentials))
+            .build()
+    }
+
+    @Bean
+    fun s3Presigner(): S3Presigner {
+        val awsCredentials = AwsBasicCredentials.create(accessKeyId, secretAccessKey)
+        return S3Presigner.builder()
             .region(Region.of(region))
             .credentialsProvider(StaticCredentialsProvider.create(awsCredentials))
             .build()

@@ -9,3 +9,4 @@ aws:
   s3:
     bucket-name: odessey-bucket
     region: ap-notheast-2
+    presigned-url-duration: 3600
