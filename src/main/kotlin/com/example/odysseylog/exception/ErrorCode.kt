@@ -18,5 +18,7 @@ enum class ErrorCode(val status: Int, val message: String) {
     SPOT_UPDATE_FAILED(2003, "Spot update failed"),
     SPOT_ID_NULL(2004, "Spot id is null"),
 
+    FILE_NAME_NULL(3005, "File name must not be null"),
+
     API_CALL_FAILED(10001, "API Call Failed")
 }

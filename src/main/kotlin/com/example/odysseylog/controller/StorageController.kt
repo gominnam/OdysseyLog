@@ -24,7 +24,7 @@ class StorageController {
         @RequestParam key: String
     ): ResponseEntity<String> {
         val duration = Duration.ofSeconds(duration.toLong())
-        storageService.generateUploadPresignedUrl(key, duration)
-        return ResponseEntity.ok("Presigned URL generated")
+        val presignedUrl = storageService.generateUploadPresignedUrl(key)
+        return ResponseEntity.ok(presignedUrl)
     }
 }

@@ -4,6 +4,6 @@ import com.example.odysseylog.dto.PhotoResponse
 import org.springframework.web.multipart.MultipartFile
 
 interface PhotoService {
-    fun getPhotos(spotId: Long): List<PhotoResponse>
-    fun uploadPhoto(spotId: Long, file: MultipartFile): String
+    fun getPhotos(key: String): List<PhotoResponse>
+    fun savePhoto(key: String, fileUrl: String)
 }

@@ -48,7 +48,7 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2") // swagger
     implementation("org.modelmapper:modelmapper:2.4.4")
     implementation("software.amazon.awssdk:s3:2.17.107")
-    implementation("software.amazon.awssdk:s3-presigner:2.17.107")
+    implementation("io.awspring.cloud:spring-cloud-aws-starter:3.1.1")
 
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
