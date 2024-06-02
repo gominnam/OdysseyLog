@@ -11,9 +11,10 @@ import java.util.*
 @EntityListeners(AuditingEntityListener::class)
 class Photo {
     @Id
-    var id: UUID? = null
+    var url: UUID? = null
 
-    var url: String? = null
+    @Column
+    var order: Int? = null
 
     @CreatedDate
     var createdAt: LocalDateTime? = null

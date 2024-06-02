@@ -37,4 +37,6 @@ class SpotServiceImpl(
             throw CustomException(errorCode, spot.id ?: throw CustomException(ErrorCode.SPOT_ID_NULL))
         }
     }
+
+    override fun save(spot: Spot): Spot = spotRepository.save(spot)
 }

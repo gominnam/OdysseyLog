@@ -22,10 +22,9 @@ class S3StorageService(
 ) : StorageService {
     private val logger = LoggerFactory.getLogger(S3StorageService::class.java)
 
-    override fun generateUploadPresignedUrl(key: String): String {
+    override fun generateUploadPresignedUrl(): String {
         return try {
             val key = UUID.randomUUID().toString() + ".jpg"
-
             val putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
                 .key(key)

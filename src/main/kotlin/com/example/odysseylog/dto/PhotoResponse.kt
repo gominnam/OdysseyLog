@@ -6,15 +6,13 @@ import java.util.*
 
 data class PhotoResponse(
     val id: String,
-    val url: String,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime
 ) {
     companion object {
         fun fromPhoto(photo: Photo): PhotoResponse {
             return PhotoResponse(
-                id = (photo.id ?: "").toString(),
-                url = photo.url ?: "",
+                id = photo.url.toString(),
                 createdAt = photo.createdAt ?: LocalDateTime.now(),
                 updatedAt = photo.updatedAt ?: LocalDateTime.now()
             )

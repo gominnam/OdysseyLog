@@ -1,6 +1,7 @@
 package com.example.odysseylog.service
 
 import com.example.odysseylog.domain.Photo
+import com.example.odysseylog.dto.PhotoRequest
 import com.example.odysseylog.dto.PhotoResponse
 import com.example.odysseylog.exception.CustomException
 import com.example.odysseylog.exception.ErrorCode
@@ -11,19 +12,12 @@ import org.springframework.web.multipart.MultipartFile
 
 @Service
 class PhotoServiceImpl(
-    private val photoRepository: PhotoRepository,
-    private val spotService: SpotService
+    private val photoRepository: PhotoRepository
 ) : PhotoService {
-
-    override fun getPhotos(key: String): List<PhotoResponse> {
-        val photos = photoRepository.findBySpotId(key)
-        return PhotoResponse.fromPhotos(photos)
-    }
-
-//    override fun savePhoto(key: Long, fileUrl: String) {
-//        val spot = spotService.getSpot(key)
-//        val photo = Photo(url = fileUrl, spot = spot)
-//        photoRepository.save(photo)
+//    override fun getPhotos(key: String): List<PhotoResponse> {
+//        val photo = photoRepository.findById(key)
+//        return listOf(PhotoResponse.fromPhoto(photo))
 //    }
 
+    override fun save(photo: Photo): Photo = photoRepository.save(photo)
 }

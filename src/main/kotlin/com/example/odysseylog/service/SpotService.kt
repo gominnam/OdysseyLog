@@ -8,4 +8,5 @@ interface SpotService {
     fun getSpot(id: Long): SpotResponse
     fun createSpot(spotRequest: SpotRequest): SpotResponse
     fun getSpotEntity(id: Long): Spot
+    fun save(spot: Spot): Spot
 }

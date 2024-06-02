@@ -2,11 +2,10 @@ spring:
   profiles:
     active: dev
 
-
 aws:
   access-key-id: ${AWS_ACCESS_KEY_ID}
   secret-access-key: ${AWS_SECRET_ACCESS_KEY}
   s3:
     bucket-name: odessey-bucket
-    region: ap-notheast-2
-    presigned-url-duration: 3600
+    region: ap-northeast-2
+    presigned-url-duration: PT1H

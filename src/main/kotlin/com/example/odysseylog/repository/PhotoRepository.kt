@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.querydsl.QuerydslPredicateExecutor
 
 interface PhotoRepository : JpaRepository<Photo, Long>, QuerydslPredicateExecutor<Route> {
-    fun findBySpotId(key: String): List<Photo>
+
 }
