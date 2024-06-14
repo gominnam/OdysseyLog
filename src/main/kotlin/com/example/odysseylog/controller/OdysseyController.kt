@@ -17,8 +17,8 @@ class OdysseyController(
     @PostMapping("/")
     fun createOsyssesy(
         @RequestBody request: OdysseyRequest
-    ) : ResponseEntity<List<OdysseyResponse>> {
-        val presignedUrls = odysseyService.createOdyssey(request)
-        return ResponseEntity.ok(presignedUrls)
+    ) : ResponseEntity<OdysseyResponse> {
+        val response = odysseyService.createOdyssey(request)
+        return ResponseEntity.ok(response)
     }
 }

@@ -1,7 +1,7 @@
 package com.example.odysseylog.service
 
-import java.time.Duration
-
 interface StorageService {
-    fun generateUploadPresignedUrl(): String
+    fun generateUploadPresignedUrl(key: String): String
+    fun generateDownloadPresignedUrl(key: String): String
+    fun generateUniqueKey(): String
 }

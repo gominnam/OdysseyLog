@@ -4,19 +4,19 @@ import com.example.odysseylog.domain.Spot
 import java.time.LocalDateTime
 
 data class SpotResponse(
-    val id: Long,
-    val latitude: Double,
-    val longitude: Double,
-    val memo: String,
-    val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime,
-    val routeId: Long,
-    val photos: List<PhotoResponse>
+    val id: String = "",
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
+    val memo: String = "",
+    val createdAt: LocalDateTime? = null,
+    val updatedAt: LocalDateTime? = null,
+    val routeId: Long = 0,
+    val photos: List<PhotoResponse> = emptyList()
 ) {
     companion object {
         fun fromSpot(spot: Spot): SpotResponse {
             return SpotResponse(
-                id = spot.id ?: 0,
+                id = spot.id ?: "",
                 latitude = spot.latitude ?: 0.0,
                 longitude = spot.longitude ?: 0.0,
                 memo = spot.memo ?: "",

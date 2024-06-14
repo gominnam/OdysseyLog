@@ -4,5 +4,5 @@ import com.example.odysseylog.dto.OdysseyRequest
 import com.example.odysseylog.dto.OdysseyResponse
 
 interface OdysseyService {
-    fun createOdyssey(request: OdysseyRequest): List<OdysseyResponse>
+    fun createOdyssey(request: OdysseyRequest): OdysseyResponse
 }

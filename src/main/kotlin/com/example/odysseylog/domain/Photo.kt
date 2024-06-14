@@ -11,12 +11,17 @@ import java.util.*
 @EntityListeners(AuditingEntityListener::class)
 class Photo {
     @Id
-    var url: UUID? = null
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null
 
-    @Column
-    var order: Int? = null
+    @Column(nullable = false)
+    var order: Long? = null
+
+    @Column(length = 1000)
+    var url: String? = null
 
     @CreatedDate
+    @Column(nullable = false, updatable = false)
     var createdAt: LocalDateTime? = null
 
     @LastModifiedDate

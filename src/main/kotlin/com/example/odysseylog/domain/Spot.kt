@@ -10,8 +10,7 @@ import java.time.LocalDateTime
 @EntityListeners(AuditingEntityListener::class)
 class Spot {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
+    var id: String? = null
 
     var latitude: Double? = null
     var longitude: Double? = null

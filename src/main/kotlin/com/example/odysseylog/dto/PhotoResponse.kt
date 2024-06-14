@@ -5,14 +5,27 @@ import java.time.LocalDateTime
 import java.util.*
 
 data class PhotoResponse(
-    val id: String,
-    val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime
+    val id: Long = 0,
+    val url: String = "",
+    val presignedUrl: String = "",
+    val createdAt: LocalDateTime? = null,
+    val updatedAt: LocalDateTime? = null
 ) {
     companion object {
         fun fromPhoto(photo: Photo): PhotoResponse {
             return PhotoResponse(
-                id = photo.url.toString(),
+                id = photo.id ?: 0,
+                url = photo.url ?: "",
+                createdAt = photo.createdAt ?: LocalDateTime.now(),
+                updatedAt = photo.updatedAt ?: LocalDateTime.now()
+            )
+        }
+
+        fun fromPhoto(photo: Photo, presignedUrl: String): PhotoResponse {
+            return PhotoResponse(
+                id = photo.id ?: 0,
+                url = photo.url ?: "",
+                presignedUrl = presignedUrl,
                 createdAt = photo.createdAt ?: LocalDateTime.now(),
                 updatedAt = photo.updatedAt ?: LocalDateTime.now()
             )

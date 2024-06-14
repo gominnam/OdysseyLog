@@ -4,6 +4,7 @@ import com.example.odysseylog.service.StorageService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -13,9 +14,16 @@ class StorageController {
     @Autowired
     private lateinit var storageService: StorageService
 
-    @GetMapping("/presigned-url")
+    @GetMapping("/upload-presigned-url")
     fun generateUploadPresignedUrl(): ResponseEntity<String> {
-        val presignedUrl = storageService.generateUploadPresignedUrl()
+        val key = storageService.generateUniqueKey()
+        val presignedUrl = storageService.generateUploadPresignedUrl(key)
+        return ResponseEntity.ok(presignedUrl)
+    }
+
+    @GetMapping("/{key}/download-presigned-url")
+    fun generateDownloadPresignedUrl(@PathVariable key: String): ResponseEntity<String> {
+        val presignedUrl = storageService.generateDownloadPresignedUrl(key)
         return ResponseEntity.ok(presignedUrl)
     }
 }

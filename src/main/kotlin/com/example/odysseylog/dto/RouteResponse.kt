@@ -5,8 +5,8 @@ import com.example.odysseylog.exception.CustomException
 import com.example.odysseylog.exception.ErrorCode
 
 data class RouteResponse(
-    val id: Long,
-    val title: String
+    val id: Long = 0,
+    val title: String = ""
 ) {
     companion object {
         fun fromRoute(route: Route?): RouteResponse {
