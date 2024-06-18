@@ -25,7 +25,6 @@ class S3StorageService(
 
     override fun generateUploadPresignedUrl(key: String): String {
         return try {
-//            val key = UUID.randomUUID().toString() + ".jpg"
             val putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
                 .key(key)
@@ -63,6 +62,6 @@ class S3StorageService(
     }
 
     override fun generateUniqueKey(): String {
-        return UUID.randomUUID().toString() + ".jpg"
+        return UUID.randomUUID().toString() + ".png"
     }
 }

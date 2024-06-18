@@ -6,14 +6,16 @@ import com.example.odysseylog.exception.ErrorCode
 
 data class RouteResponse(
     val id: Long = 0,
-    val title: String = ""
+    val title: String = "",
+    val photoUrl: String = "",
 ) {
     companion object {
         fun fromRoute(route: Route?): RouteResponse {
             val id = route?.id ?: throw CustomException(ErrorCode.ROUTE_ID_NULL)
             return RouteResponse(
                 id = id,
-                title = route.title ?: ""
+                title = route.title ?: "",
+                photoUrl = route.photoUrl ?: ""
             )
         }
     }

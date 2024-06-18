@@ -3,10 +3,7 @@ package com.example.odysseylog.service
 import com.example.odysseylog.domain.Photo
 import com.example.odysseylog.domain.Route
 import com.example.odysseylog.domain.Spot
-import com.example.odysseylog.dto.OdysseyRequest
-import com.example.odysseylog.dto.OdysseyResponse
-import com.example.odysseylog.dto.PhotoResponse
-import com.example.odysseylog.dto.SpotResponse
+import com.example.odysseylog.dto.*
 import jakarta.transaction.Transactional
 import org.modelmapper.ModelMapper
 import org.springframework.stereotype.Service
@@ -24,6 +21,9 @@ class OdysseyServiceImpl(
     @Transactional
     override fun createOdyssey(request : OdysseyRequest): OdysseyResponse {
         // Step 1: Convert RouteRequest to Route entity and save it
+        val routeKey = s3StorageService.generateUniqueKey()
+        val routePresignedUrl = s3StorageService.generateUploadPresignedUrl(routeKey)
+        request.route.photoUrl = routeKey
         val savedRoute = routeService.createRoute(request.route)
 
         // Step 2: Convert SpotRequest to Spot entity, set Route ID, and save them
@@ -65,6 +65,15 @@ class OdysseyServiceImpl(
             spotResponse
         }
 
-        return OdysseyResponse(spots = spotResponse)
+        val routeResponse = RouteResponse(
+            id = savedRoute.id ?: 0,
+            title = savedRoute.title ?: "",
+            photoUrl = routePresignedUrl
+        )
+
+        return OdysseyResponse(
+            route = routeResponse,
+            spots = spotResponse
+        )
     }
 }
