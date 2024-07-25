@@ -7,16 +7,23 @@ import com.example.odysseylog.exception.CustomException
 import com.example.odysseylog.exception.ErrorCode
 import com.example.odysseylog.repository.RouteRepository
 import org.modelmapper.ModelMapper
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 @Service
 class RouteServiceImpl(
     private val routeRepository: RouteRepository,
-    private val modelMapper: ModelMapper
+    private val modelMapper: ModelMapper,
+    private val presignedUrlService: S3StorageService
 ) : RouteService {
 
-    override fun getRoutes(): String {
-        return "Hello, Route!"
+    override fun getRoutes(lastFetchedAt: LocalDateTime, pageable: Pageable): Page<RouteResponse> {
+        val routePage = routeRepository.findAllByCreatedAtBefore(lastFetchedAt, pageable)
+        return routePage.map { route ->
+            val presignedUrl = presignedUrlService.generateDownloadPresignedUrl(route.photoUrl.toString())
+            RouteResponse.fromRoute(route, presignedUrl) }
     }
 
     override fun getRoute(id: Long): RouteResponse {

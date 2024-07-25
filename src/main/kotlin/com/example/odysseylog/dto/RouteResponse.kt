@@ -8,14 +8,16 @@ data class RouteResponse(
     val id: Long = 0,
     val title: String = "",
     val photoUrl: String = "",
+    val presignedUrl: String? = null
 ) {
     companion object {
-        fun fromRoute(route: Route?): RouteResponse {
+        fun fromRoute(route: Route?, presignedUrl: String? = null): RouteResponse {
             val id = route?.id ?: throw CustomException(ErrorCode.ROUTE_ID_NULL)
             return RouteResponse(
                 id = id,
                 title = route.title ?: "",
-                photoUrl = route.photoUrl ?: ""
+                photoUrl = route.photoUrl ?: "",
+                presignedUrl = presignedUrl
             )
         }
     }

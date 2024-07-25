@@ -5,16 +5,24 @@ import com.example.odysseylog.dto.RouteResponse
 import com.example.odysseylog.service.RouteService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDateTime
 
 @RestController
 @RequestMapping("/api/routes")
 class RouteController(private val routeService: RouteService) {
 
-    @GetMapping
-    fun getRoutes(): String {
-        return "Hello, Route!"
+    @GetMapping("/")
+    fun getRoute(
+        @RequestParam(value = "timestamp", required = false) timestamp: LocalDateTime?,
+        @RequestParam(value = "size", defaultValue = "15") size: Int
+    ): ResponseEntity<Page<RouteResponse>> {
+        val adjustedTimestamp = timestamp ?: LocalDateTime.now()
+        val routes = routeService.getRoutes(adjustedTimestamp, PageRequest.of(0, size))
+        return ResponseEntity.ok(routes)
     }
 
     @Operation(summary = "Get Route By Route ID")
