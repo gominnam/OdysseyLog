@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: prod
 
 aws:
   access-key-id: ${AWS_ACCESS_KEY_ID}
@@ -9,3 +9,8 @@ aws:
     bucket-name: odessey-bucket
     region: ap-northeast-2
     presigned-url-duration: PT1H
+
+logging:
+  level:
+    org:
+      springframework: DEBUG

@@ -38,6 +38,7 @@ dependencies {
 
     // database
     runtimeOnly("com.h2database:h2")
+    implementation("mysql:mysql-connector-java:8.0.23")
 
     // querydsl
     implementation("com.querydsl:querydsl-core:5.1.0")
