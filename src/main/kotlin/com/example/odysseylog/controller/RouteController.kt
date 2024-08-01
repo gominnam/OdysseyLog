@@ -18,10 +18,11 @@ class RouteController(private val routeService: RouteService) {
     @GetMapping("/")
     fun getRoute(
         @RequestParam(value = "timestamp", required = false) timestamp: LocalDateTime?,
-        @RequestParam(value = "size", defaultValue = "15") size: Int
+        @RequestParam(value = "size", defaultValue = "15") size: Int,
+        @RequestParam(value = "page", defaultValue = "0") page: Int
     ): ResponseEntity<Page<RouteResponse>> {
         val adjustedTimestamp = timestamp ?: LocalDateTime.now()
-        val routes = routeService.getRoutes(adjustedTimestamp, PageRequest.of(0, size))
+        val routes = routeService.getRoutes(adjustedTimestamp, PageRequest.of(page, size))
         return ResponseEntity.ok(routes)
     }
 

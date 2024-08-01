@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
 @Service
@@ -20,16 +21,19 @@ class RouteServiceImpl(
 ) : RouteService {
 
     override fun getRoutes(lastFetchedAt: LocalDateTime, pageable: Pageable): Page<RouteResponse> {
-        val routePage = routeRepository.findAllByCreatedAtBefore(lastFetchedAt, pageable)
-        return routePage.map { route ->
+        val routes = routeRepository.findAllByCreatedAtBefore(lastFetchedAt, pageable)
+        return routes.map { route ->
             val presignedUrl = presignedUrlService.generateDownloadPresignedUrl(route.photoUrl.toString())
             RouteResponse.fromRoute(route, presignedUrl) }
     }
 
+    @Transactional(readOnly = true)
     override fun getRoute(id: Long): RouteResponse {
-        return routeRepository.findById(id)
-            .map(RouteResponse::fromRoute)
-            .orElseThrow { CustomException(ErrorCode.ROUTE_NOT_FOUND, id) }
+        val route = routeRepository.findRouteWithSpots(id)
+            ?: throw CustomException(ErrorCode.ROUTE_NOT_FOUND, id)
+        return RouteResponse.fromRoute(route)
+//        val presignedUrl = presignedUrlService.generateDownloadPresignedUrl(route.photoUrl.toString())
+//        return RouteResponse.fromRoute(route, presignedUrl)
     }
 
     override fun deleteRoute(id: Long) {
