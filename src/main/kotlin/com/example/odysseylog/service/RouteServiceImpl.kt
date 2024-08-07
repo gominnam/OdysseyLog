@@ -30,10 +30,8 @@ class RouteServiceImpl(
     @Transactional(readOnly = true)
     override fun getRoute(id: Long): RouteResponse {
         val route = routeRepository.findRouteWithSpots(id)
-            ?: throw CustomException(ErrorCode.ROUTE_NOT_FOUND, id)
+            ?: throw CustomException(ErrorCode.ROUTE_NOT_FOUND, id.toString())
         return RouteResponse.fromRoute(route)
-//        val presignedUrl = presignedUrlService.generateDownloadPresignedUrl(route.photoUrl.toString())
-//        return RouteResponse.fromRoute(route, presignedUrl)
     }
 
     override fun deleteRoute(id: Long) {

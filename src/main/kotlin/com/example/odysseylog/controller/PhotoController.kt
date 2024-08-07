@@ -16,12 +16,13 @@ class PhotoController {
     @Autowired
     private lateinit var photoService: PhotoService
 
-    @PostMapping("/upload")
+    @PostMapping("/")
     fun uploadPhoto(
-        @RequestParam("spotId") spotId: Long,
+        @RequestParam("spotId") key: String,
         @RequestParam("file") file: MultipartFile
     ): ResponseEntity<String> {
-        val uploadedUrl = photoService.uploadPhoto(spotId, file)
-        return ResponseEntity.ok(uploadedUrl)
+//        val message = photoService.uploadPhoto(key, file)
+        val message  = "t"
+        return ResponseEntity.ok(message)
     }
 }

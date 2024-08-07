@@ -18,7 +18,7 @@ class RouteController(private val routeService: RouteService) {
     @GetMapping("/")
     fun getRoute(
         @RequestParam(value = "timestamp", required = false) timestamp: LocalDateTime?,
-        @RequestParam(value = "size", defaultValue = "15") size: Int,
+        @RequestParam(value = "size", defaultValue = "2") size: Int, // 15, 일단 2개로 테스트
         @RequestParam(value = "page", defaultValue = "0") page: Int
     ): ResponseEntity<Page<RouteResponse>> {
         val adjustedTimestamp = timestamp ?: LocalDateTime.now()

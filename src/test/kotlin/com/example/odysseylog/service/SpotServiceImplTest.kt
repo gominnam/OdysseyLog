@@ -35,7 +35,7 @@ class SpotServiceImplTest {
         // given
         val id = 1L
         val spot = Spot().apply {
-            this.id = 1L
+//            this.id = 1L
             this.latitude = 37.123456
             this.longitude = 127.123456
             this.memo = "spot-memo"
@@ -76,7 +76,7 @@ class SpotServiceImplTest {
             this.memo = "spot-memo"
         }
         val spot = Spot().apply {
-            this.id = 1L
+//            this.id = 1L
             this.latitude = 37.123456
             this.longitude = 127.123456
             this.memo = "spot-memo"
@@ -103,7 +103,7 @@ class SpotServiceImplTest {
             this.memo = "spot-memo"
         }
         val spot = Spot().apply {
-            this.id = 1L
+//            this.id = 1L
             this.latitude = 37.123456
             this.longitude = 127.123456
             this.memo = "spot-memo"
