@@ -5,8 +5,10 @@ import com.example.odysseylog.dto.RouteResponse
 import com.example.odysseylog.service.RouteService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
+import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDateTime
@@ -15,14 +17,17 @@ import java.time.LocalDateTime
 @RequestMapping("/api/routes")
 class RouteController(private val routeService: RouteService) {
 
+    private val logger = LoggerFactory.getLogger(RouteController::class.java)
+
     @GetMapping("/")
     fun getRoute(
         @RequestParam(value = "timestamp", required = false) timestamp: LocalDateTime?,
         @RequestParam(value = "size", defaultValue = "2") size: Int, // 15, 일단 2개로 테스트
-        @RequestParam(value = "page", defaultValue = "0") page: Int
+        @RequestParam(value = "page", defaultValue = "0") page: Int,
+        @RequestParam(value = "sort", defaultValue = "createdAt") sort: String
     ): ResponseEntity<Page<RouteResponse>> {
         val adjustedTimestamp = timestamp ?: LocalDateTime.now()
-        val routes = routeService.getRoutes(adjustedTimestamp, PageRequest.of(page, size))
+        val routes = routeService.getRoutes(adjustedTimestamp, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, sort)))
         return ResponseEntity.ok(routes)
     }
 
@@ -33,6 +38,7 @@ class RouteController(private val routeService: RouteService) {
         @PathVariable id: Long,
     ): ResponseEntity<RouteResponse> {
         val route = routeService.getRoute(id)
+        logger.info("Route: $route")
         return ResponseEntity.ok(route)
     }
 

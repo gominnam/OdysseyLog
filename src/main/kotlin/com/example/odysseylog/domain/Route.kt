@@ -32,6 +32,6 @@ class Route {
     @JoinColumn(name = "user_id")
     var user: User? = null
 
-    @OneToMany(mappedBy = "route", cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     var spots: MutableList<Spot> = mutableListOf()
 }

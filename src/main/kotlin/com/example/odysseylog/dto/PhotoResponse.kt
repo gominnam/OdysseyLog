@@ -12,20 +12,10 @@ data class PhotoResponse(
     val updatedAt: LocalDateTime? = null
 ) {
     companion object {
-        fun fromPhoto(photo: Photo): PhotoResponse {
+        fun fromPhoto(photo: Photo, presignedUrl: String? = null): PhotoResponse {
             return PhotoResponse(
                 id = photo.id ?: 0,
                 url = photo.url ?: "",
-                createdAt = photo.createdAt ?: LocalDateTime.now(),
-                updatedAt = photo.updatedAt ?: LocalDateTime.now()
-            )
-        }
-
-        fun fromPhoto(photo: Photo, presignedUrl: String): PhotoResponse {
-            return PhotoResponse(
-                id = photo.id ?: 0,
-                url = photo.url ?: "",
-                presignedUrl = presignedUrl,
                 createdAt = photo.createdAt ?: LocalDateTime.now(),
                 updatedAt = photo.updatedAt ?: LocalDateTime.now()
             )

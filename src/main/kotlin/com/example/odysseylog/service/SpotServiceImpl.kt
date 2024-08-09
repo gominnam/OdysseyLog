@@ -1,6 +1,7 @@
 package com.example.odysseylog.service
 
 import com.example.odysseylog.domain.Spot
+import com.example.odysseylog.dto.RouteResponse
 import com.example.odysseylog.dto.SpotRequest
 import com.example.odysseylog.dto.SpotResponse
 import com.example.odysseylog.exception.CustomException
@@ -12,13 +13,14 @@ import org.springframework.stereotype.Service
 @Service
 class SpotServiceImpl(
     private val spotRepository: SpotRepository,
-    private val modelMapper: ModelMapper
+    private val modelMapper: ModelMapper,
+    private val presignedUrlService: S3StorageService
 ) : SpotService {
 
-    override fun getSpot(id: Long): SpotResponse {
-        return spotRepository.findById(id)
-            .map(SpotResponse::fromSpot)
-            .orElseThrow { CustomException(ErrorCode.SPOT_NOT_FOUND, id) }
+    override fun getSpot(id: String): SpotResponse {
+        val spot = spotRepository.findById(id)
+            ?: throw CustomException(ErrorCode.SPOT_NOT_FOUND, id)
+        return SpotResponse.fromSpot(spot)
     }
 
     override fun createSpot(spotRequest: SpotRequest): SpotResponse {
@@ -39,4 +41,21 @@ class SpotServiceImpl(
     }
 
     override fun save(spot: Spot): Spot = spotRepository.save(spot)
+
+    override fun getSpotPresignedUrls(request: List<SpotRequest>): List<SpotResponse> {
+        return request.mapNotNull { spot ->
+            val photosWithPresignedUrls = spot.photos.mapNotNull { photo ->
+                if (photo.url.isEmpty()) {
+                    return@mapNotNull null
+                }
+                val presignedUrl = presignedUrlService.generateDownloadPresignedUrl(photo.url)
+                photo.copy(presignedUrl = presignedUrl)
+            }
+            if (photosWithPresignedUrls.isEmpty()) {
+                return@mapNotNull null
+            }
+            val spotEntity = modelMapper.map(spot, Spot::class.java)
+            SpotResponse.fromSpot(spotEntity, photosWithPresignedUrls)
+        }
+    }
 }

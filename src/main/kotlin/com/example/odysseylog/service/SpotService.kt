@@ -5,7 +5,8 @@ import com.example.odysseylog.dto.SpotRequest
 import com.example.odysseylog.dto.SpotResponse
 
 interface SpotService {
-    fun getSpot(id: Long): SpotResponse
+    fun getSpot(id: String): SpotResponse
+    fun getSpotPresignedUrls(request: List<SpotRequest>): List<SpotResponse>
     fun createSpot(spotRequest: SpotRequest): SpotResponse
     fun getSpotEntity(id: Long): Spot
     fun save(spot: Spot): Spot

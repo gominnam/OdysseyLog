@@ -1,6 +1,7 @@
 package com.example.odysseylog.repository
 
 import com.example.odysseylog.domain.Route
+import com.example.odysseylog.domain.Spot
 import com.querydsl.core.types.Predicate
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -16,4 +17,7 @@ interface RouteRepository : JpaRepository<Route, Long>, QuerydslPredicateExecuto
 
     @Query("SELECT r FROM Route r JOIN FETCH r.spots WHERE r.id = :id")
     fun findRouteWithSpots(id: Long): Route?
+
+    @Query("SELECT s FROM Spot s JOIN FETCH s.photos WHERE s.route.id = :routeId")
+    fun findSpotsWithPhotosByRouteId(routeId: Long): List<Spot>
 }
