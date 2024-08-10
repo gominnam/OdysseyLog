@@ -2,7 +2,6 @@ package com.example.odysseylog.dto
 
 import com.example.odysseylog.domain.Photo
 import java.time.LocalDateTime
-import java.util.*
 
 data class PhotoResponse(
     val id: Long = 0,
@@ -12,10 +11,11 @@ data class PhotoResponse(
     val updatedAt: LocalDateTime? = null
 ) {
     companion object {
-        fun fromPhoto(photo: Photo, presignedUrl: String? = null): PhotoResponse {
+        fun fromPhoto(photo: Photo): PhotoResponse {
             return PhotoResponse(
                 id = photo.id ?: 0,
                 url = photo.url ?: "",
+                presignedUrl = photo.presignedUrl ?: "",
                 createdAt = photo.createdAt ?: LocalDateTime.now(),
                 updatedAt = photo.updatedAt ?: LocalDateTime.now()
             )

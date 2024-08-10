@@ -20,6 +20,9 @@ class Photo {
     @Column(length = 1000)
     var url: String? = null
 
+    @Transient
+    var presignedUrl: String? = null
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     var createdAt: LocalDateTime? = null
@@ -30,4 +33,8 @@ class Photo {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "spot_id")
     var spot: Spot? = null
+
+    override fun toString(): String {
+        return "Photo(id=$id, order=$order, url=$url, presignedUrl=$presignedUrl, createdAt=$createdAt, updatedAt=$updatedAt)"
+    }
 }

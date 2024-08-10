@@ -28,4 +28,8 @@ class Spot {
 
     @OneToMany(mappedBy = "spot", cascade = [CascadeType.ALL], orphanRemoval = true)
     var photos: MutableList<Photo> = mutableListOf()
+
+    override fun toString(): String {
+        return "Spot(id=$id, latitude=$latitude, longitude=$longitude, memo=$memo, createdAt=$createdAt, updatedAt=$updatedAt, photos=${photos.map { it.toString() }})"
+    }
 }

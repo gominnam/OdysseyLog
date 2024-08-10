@@ -14,7 +14,7 @@ data class SpotResponse(
     val photos: List<PhotoResponse> = emptyList()
 ) {
     companion object {
-        fun fromSpot(spot: Spot, photos: List<PhotoResponse>? = emptyList()): SpotResponse {
+        fun fromSpot(spot: Spot, photos: List<PhotoResponse>? = null): SpotResponse {
             return SpotResponse(
                 id = spot.id ?: "",
                 latitude = spot.latitude ?: 0.0,
@@ -23,7 +23,7 @@ data class SpotResponse(
                 createdAt = spot.createdAt ?: LocalDateTime.now(),
                 updatedAt = spot.updatedAt ?: LocalDateTime.now(),
                 routeId = spot.route?.id ?: 0,
-                photos = spot.photos.map { PhotoResponse.fromPhoto(it) }
+                photos = photos ?: spot.photos.map { PhotoResponse.fromPhoto(it) }
             )
         }
     }

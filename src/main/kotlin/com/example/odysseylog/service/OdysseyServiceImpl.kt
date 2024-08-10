@@ -40,11 +40,12 @@ class OdysseyServiceImpl(
                     this.order = i
                     this.spot = spotEntity
                     this.url = path
+                    this.presignedUrl = presignedUrl
                 }
                 photoService.save(photoEntity)
                 photos.add(photoEntity)
 
-                val photoResponse = PhotoResponse.fromPhoto(photoEntity, presignedUrl)
+                val photoResponse = PhotoResponse.fromPhoto(photoEntity)
                 photoResponses.add(photoResponse)
             }
 

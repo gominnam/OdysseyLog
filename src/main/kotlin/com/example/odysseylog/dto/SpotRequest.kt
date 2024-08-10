@@ -5,6 +5,6 @@ data class SpotRequest(
     var latitude: Double? = null,
     var longitude: Double? = null,
     var memo: String? = null,
-    var photos: List<PhotoResponse> = emptyList(),
+    var photos: List<PhotoRequest> = emptyList(),
     var photoSize: Long? = null
 )

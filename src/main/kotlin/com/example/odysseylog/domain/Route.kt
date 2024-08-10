@@ -5,6 +5,7 @@ import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
+import kotlin.jvm.Transient
 
 @Entity
 @EntityListeners(AuditingEntityListener::class)
@@ -22,6 +23,9 @@ class Route {
     var totalDistance: Double? = null // 총 이동거리 (단위: 미터)
     var photoUrl: String? = null
 
+    @Transient
+    val presignedUrl: String? = null
+
     @CreatedDate
     var createdAt: LocalDateTime? = null
 
@@ -34,4 +38,8 @@ class Route {
 
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     var spots: MutableList<Spot> = mutableListOf()
+
+    override fun toString(): String {
+        return "Route(id=$id, title=$title, startLatitude=$startLatitude, startLongitude=$startLongitude, endLatitude=$endLatitude, endLongitude=$endLongitude, totalDuration=$totalDuration, totalDistance=$totalDistance, photoUrl=$photoUrl, createdAt=$createdAt, updatedAt=$updatedAt, user=$user, spots=${spots.map { it.toString() }})"
+    }
 }

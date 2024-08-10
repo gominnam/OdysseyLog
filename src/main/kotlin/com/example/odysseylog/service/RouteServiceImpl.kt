@@ -31,9 +31,14 @@ class RouteServiceImpl(
     override fun getRoute(id: Long): RouteResponse {
         val route = routeRepository.findRouteWithSpots(id)
             ?: throw CustomException(ErrorCode.ROUTE_NOT_FOUND, id.toString())
+
+        val spotsWithPhotos = routeRepository.findSpotsWithPhotosByRouteId(route.id!!)
+
         route.spots.forEach { spot ->
-            spot.photos = routeRepository.findSpotsWithPhotosByRouteId(route.id!!).find { it.id == spot.id }?.photos ?: mutableListOf()
+            val spotWithPhotos = spotsWithPhotos.find { it.id == spot.id }
+            spot.photos = spotWithPhotos?.photos ?: mutableListOf()
         }
+
         return RouteResponse.fromRoute(route)
     }
 
