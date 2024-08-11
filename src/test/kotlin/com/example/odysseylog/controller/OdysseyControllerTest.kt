@@ -17,5 +17,4 @@ class OdysseyControllerTest {
     fun `when createOdyssey is called with valid request, then return the corresponding presignedUrls`() {
 
     }
-
 }

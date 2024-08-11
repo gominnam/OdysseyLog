@@ -33,9 +33,9 @@ class SpotServiceImplTest {
     @Test
     fun `when getSpot is called with valid id, then return the corresponding spot`() {
         // given
-        val id = 1L
+        val id = "uuid"
         val spot = Spot().apply {
-//            this.id = 1L
+            this.id = id
             this.latitude = 37.123456
             this.longitude = 127.123456
             this.memo = "spot-memo"
@@ -43,7 +43,7 @@ class SpotServiceImplTest {
             this.updatedAt = LocalDateTime.now()
         }
         val spotResponse = SpotResponse.fromSpot(spot)
-        `when`(spotRepository.findById(id)).thenReturn(Optional.of(spot))
+        `when`(spotRepository.findById(id)).thenReturn(spot)
 
         // when
         val result = spotService.getSpot(id)
@@ -55,8 +55,8 @@ class SpotServiceImplTest {
     @Test
     fun `when getSpot is called with invalid id, then throw NoSuchElementException`() {
         // given
-        val id = 1L
-        `when`(spotRepository.findById(id)).thenReturn(Optional.empty())
+        val id = "uuid"
+        `when`(spotRepository.findById(id)).thenReturn(null)
 
         // when
         val exception = assertThrows<CustomException> {
@@ -75,8 +75,9 @@ class SpotServiceImplTest {
             this.longitude = 127.123456
             this.memo = "spot-memo"
         }
+        val id = "uuid"
         val spot = Spot().apply {
-//            this.id = 1L
+            this.id = id
             this.latitude = 37.123456
             this.longitude = 127.123456
             this.memo = "spot-memo"
@@ -102,8 +103,9 @@ class SpotServiceImplTest {
             this.longitude = 127.123456
             this.memo = "spot-memo"
         }
+        val id = "uuid"
         val spot = Spot().apply {
-//            this.id = 1L
+            this.id = id
             this.latitude = 37.123456
             this.longitude = 127.123456
             this.memo = "spot-memo"
@@ -120,5 +122,10 @@ class SpotServiceImplTest {
 
         // then
         assertEquals(ErrorCode.SPOT_CREATION_FAILED.message, exception.message)
+    }
+    
+    @Test
+    fun `when `(){
+
     }
 }

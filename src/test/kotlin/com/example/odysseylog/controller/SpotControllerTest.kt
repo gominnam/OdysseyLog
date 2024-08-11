@@ -64,7 +64,7 @@ class SpotControllerTest {
     @Test
     fun `when getSpot is called with invalid id, then return Exception Not Found`() {
         // given
-        val id = 1L
+        val id = "uuid"
         `when`(spotService.getSpot(id)).thenThrow(CustomException(ErrorCode.SPOT_NOT_FOUND, id))
 
         // when
@@ -99,5 +99,15 @@ class SpotControllerTest {
 
         // then
         assertEquals("Spot created", result.contentAsString)
+    }
+
+    @Test
+    fun `when getSpotPresignedUrls is called with valid request, then return presignedUrls`(){
+        //getSpotPresignedUrls
+        // given
+        val spotIds = listOf("uuid1", "uuid2")
+
+
+
     }
 }
