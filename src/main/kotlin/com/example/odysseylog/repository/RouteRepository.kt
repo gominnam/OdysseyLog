@@ -15,7 +15,7 @@ interface RouteRepository : JpaRepository<Route, Long>, QuerydslPredicateExecuto
 
     fun findAllByCreatedAtBefore(createdAt: LocalDateTime, pageable: Pageable): Page<Route>
 
-    @Query("SELECT r FROM Route r JOIN FETCH r.spots WHERE r.id = :id")
+    @Query("SELECT r FROM Route r JOIN FETCH r.spots s WHERE r.id = :id ORDER BY s.createdAt ASC")
     fun findRouteWithSpots(id: Long): Route?
 
     @Query("SELECT s FROM Spot s JOIN FETCH s.photos WHERE s.route.id = :routeId")
