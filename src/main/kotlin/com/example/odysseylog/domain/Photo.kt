@@ -20,6 +20,9 @@ class Photo {
     @Column(length = 1000)
     var url: String? = null
 
+    @Column
+    var isCompressed: Boolean = false
+
     @Transient
     var presignedUrl: String? = null
 
