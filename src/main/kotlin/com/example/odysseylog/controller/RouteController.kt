@@ -19,7 +19,7 @@ class RouteController(private val routeService: RouteService) {
     @GetMapping("/")
     fun getRoute(
         @RequestParam(value = "timestamp", required = false) timestamp: LocalDateTime?,
-        @RequestParam(value = "size", defaultValue = "9") size: Int, // 15, 일단 2개로 테스트
+        @RequestParam(value = "size", defaultValue = "15") size: Int,
         @RequestParam(value = "page", defaultValue = "0") page: Int,
         @RequestParam(value = "sort", defaultValue = "createdAt") sort: String
     ): ResponseEntity<Page<RouteResponse>> {

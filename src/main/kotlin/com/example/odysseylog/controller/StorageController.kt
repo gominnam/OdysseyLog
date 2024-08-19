@@ -15,8 +15,8 @@ class StorageController {
     private lateinit var storageService: StorageService
 
     @GetMapping("/upload-presigned-url")
-    fun generateUploadPresignedUrl(): ResponseEntity<String> {
-        val key = storageService.generateUniqueKey()
+    fun generateUploadPresignedUrl(@PathVariable prefix: String): ResponseEntity<String> {
+        val key = storageService.generateUniqueKey(prefix)
         val presignedUrl = storageService.generateUploadPresignedUrl(key)
         return ResponseEntity.ok(presignedUrl)
     }

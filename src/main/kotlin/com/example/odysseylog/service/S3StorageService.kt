@@ -60,7 +60,7 @@ class S3StorageService(
         }
     }
 
-    override fun generateUniqueKey(): String {
-        return UUID.randomUUID().toString() + ".png"
+    override fun generateUniqueKey(prefix: String): String {
+        return UUID.randomUUID().toString() + ".jpg"
     }
 }

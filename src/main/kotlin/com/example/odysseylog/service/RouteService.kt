@@ -4,6 +4,7 @@ import com.example.odysseylog.dto.RouteRequest
 import com.example.odysseylog.dto.RouteResponse
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.http.ResponseEntity
 import java.time.LocalDateTime
 
 interface RouteService {
@@ -12,4 +13,5 @@ interface RouteService {
     fun deleteRoute(id: Long)
     fun createRoute(routeRequest: RouteRequest): RouteResponse
     fun updateRoute(routeRequest: RouteRequest): RouteResponse
+    fun updateCompressedStatus(photoUrl: String): ResponseEntity<String>
 }

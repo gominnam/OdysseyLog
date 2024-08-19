@@ -103,11 +103,12 @@ class S3StorageServiceTest {
     @Test
     fun `generateUniqueKey should return a unique key`() {
         // when
-        val result = s3StorageService.generateUniqueKey()
+        val prefix: String = "test-prefix"
+        val result = s3StorageService.generateUniqueKey(prefix)
 
         // then
-        assertEquals(true, result.endsWith(".png"))
-        assertEquals(40, result.length) // UUID + ".png" = 36 + 4
+        assertEquals(true, result.endsWith(".jpg"))
+        assertEquals(40, result.length) // prefix-{UUID} + ".jpg" = 36 + 4
     }
 }
 
