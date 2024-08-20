@@ -4,8 +4,8 @@
 # 1. Project OdysseyLog
 
 - AWS S3 Storage를 이용하기 위해 Presigned URL을 사용하여 이미지 GET, POST를 구현.
-- `Odyssey`는  트로이 전쟁 영웅 오디세우스(Odysseus)의 10년간에 걸친 귀향 모험담을 말합니다.</br>
-  사용자가 자신만의 여행 경로나 산책 경로를 사진과 텍스트로 기록하고, 이를 다른 사용자와 공유하며 소통할 수 있는 플랫폼을 만들고자 하였습니다.
+- AWS Lambda를 이용하여 이미지 리사이징을 구현.
+- 사용자가 자신만의 여행 경로나 산책 경로를 사진과 텍스트로 기록하고, 이를 다른 사용자와 공유하며 소통할 수 있는 서비스.
 
 
 # 2. Development Environment
@@ -13,7 +13,7 @@
 - Language: Kotlin, Dart
 - Framework: Spring Boot, Flutter(https://github.com/gominnam/OdysseyLogApp)
 - Database: MySQL
-- AWS S3 Storage
+- AWS S3 Storage, Lambda(python 3.10)
 
 # 3. Structure
 
