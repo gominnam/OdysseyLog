@@ -4,9 +4,8 @@
 # 1. Project OdysseyLog
 
 - AWS S3 Storage를 이용하기 위해 Presigned URL을 사용하여 이미지 GET, POST를 구현.
-- AWS Lambda를 이용하여 이미지 리사이징을 구현.
-- 사용자가 자신만의 여행 경로나 산책 경로를 사진과 텍스트로 기록하고, 이를 다른 사용자와 공유하며 소통할 수 있는 서비스.
-
+- AWS Lambda를 이용하여 이미지 리사이징을 구현. 
+- App에서 사용하는 API를 Spring Boot로 구현.
 
 # 2. Development Environment
 
