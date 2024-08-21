@@ -1,10 +1,9 @@
 
- 앱을 사용하는 유저들이 자신만의 경험한 여행경로나 산책경로들을 사진과 텍스트로 기록하고 서로 공유하고 소통하는 목적으로 프로젝트를 구상했다.
-
 # 1. Project OdysseyLog
 
+- 여행 일지를 기록하고 공유하는 App Server.
 - AWS S3 Storage를 이용하기 위해 Presigned URL을 사용하여 이미지 GET, POST를 구현.
-- AWS Lambda를 이용하여 이미지 리사이징을 구현. 
+- AWS Lambda를 이용하여 이미지 리사이징을 구현.
 - App에서 사용하는 API를 Spring Boot로 구현.
 
 # 2. Development Environment
@@ -16,9 +15,14 @@
 
 # 3. Structure
 
-- Archetecture </br>
+- 설계 이미지 </br>
    <img src="src/main/resources/static/architecture.png" alt="structure" width="600"/></br>
 
+- Moblie로부터 GET, POST 요청을 처리
+- AWS S3 Storage에 이미지가 업로드
+  - 이미지 업로드가 완료가 Event Trigger로 AWS Lambda 호출
+    - AWS Lambda를 통해 이미지 리사이징 
+      - 리사이징이 완료되면 Spring 서버로 notification api를 호출하여 isCompressed 컬럼 상태를 업데이트
 
 # 4. Presigned URL
 
@@ -40,4 +44,8 @@
      - GET</br>
        <img src="src/main/resources/static/presigned_url_get.png" alt="structure" width="600"/></br></br>
 
-       
+
+# 5. Reference
+
+- [AWS S3 Presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/PresignedUrlUploadObject.html)
+- [AWS LABMDA](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
