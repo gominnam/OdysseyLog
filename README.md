@@ -20,7 +20,7 @@
 
 - Moblie로부터 GET, POST 요청을 처리
 - AWS S3 Storage에 이미지가 업로드
-  - 이미지 업로드가 완료가 Event Trigger로 AWS Lambda 호출
+  - 이미지 업로드 완료가 Event Trigger로 AWS Lambda 호출
     - AWS Lambda를 통해 이미지 리사이징 
       - 리사이징이 완료되면 Spring 서버로 notification api를 호출하여 isCompressed 컬럼 상태를 업데이트
 
