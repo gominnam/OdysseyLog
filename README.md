@@ -55,10 +55,20 @@ App Server의 주요 기능은 다음과 같습니다
      - GET</br>
        <img src="src/main/resources/static/presigned_url_get.png" alt="structure" width="600"/></br></br>
 
-</br></br>
 
 
-# 5. Reference
+# 5. AWS Lambda
+**AWS S3 에 Image Upload 완료되면 Event Trigger로 AWS Lambda 호출**</br></br>
+
+1. 업로드된 원본 이미지를 퀄리티 85로 리사이징하여 새로운 이미지 생성
+<img src="src/main/resources/static/lambda-1.png" alt="structure" width="600"/></br></br>
+</br>
+
+2. 리사이징된 이미지를 S3에 업로드하고 Spring 서버로 notification api를 호출하여 isCompressed 컬럼 상태를 업데이트
+<img src="src/main/resources/static/lambda-2.png" alt="structure" width="600"/></br></br>
+
+
+# 6. Reference
 
 - [AWS S3 Presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/PresignedUrlUploadObject.html)
 - [AWS LABMDA](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
