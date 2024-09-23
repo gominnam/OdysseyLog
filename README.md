@@ -1,19 +1,27 @@
+# OdysseyLog
 
-# 1. Project OdysseyLog
+# 1. 프로젝트 목적 
+이 프로젝트는 여행 일지를 기록하고 공유하는 App(Flutter)과 App Server를 구현한 프로젝트입니다.</br>
+**[Flutter 레포지토리 GitHub Link](https://github.com/gominnam/OdysseyLogApp)**</br>
+App Server의 주요 기능은 다음과 같습니다
 
-- 여행 일지를 기록하고 공유하는 App Server.
-- AWS S3 Storage를 이용하기 위해 Presigned URL을 사용하여 이미지 GET, POST를 구현.
-- AWS Lambda를 이용하여 이미지 리사이징을 구현.
-- App에서 사용하는 API를 Spring Boot로 구현.
+- **Presigned URL**: App에서 이미지 업로드를 위한 Presigned URL을 제공.
+- **Image Upload**: App에서 업로드한 이미지를 AWS S3 Storage에 저장.
+- **Image Resize**: AWS Lambda를 이용하여 이미지 리사이징.
+- **App Server**: App에서 사용하는 API를 Spring Boot로 구현.
+</br></br>
 
-# 2. Development Environment
+
+# 2. 개발 환경 
 
 - Language: Kotlin, Dart
-- Framework: Spring Boot, Flutter(https://github.com/gominnam/OdysseyLogApp)
+- Framework: Spring Boot, Flutter
 - Database: MySQL
 - AWS S3 Storage, Lambda(python 3.10)
+</br></br>
 
-# 3. Structure
+
+# 3. 구조
 
 - 설계 이미지 </br>
    <img src="src/main/resources/static/architecture.png" alt="structure" width="600"/></br>
@@ -23,6 +31,9 @@
   - 이미지 업로드 완료가 Event Trigger로 AWS Lambda 호출
     - AWS Lambda를 통해 이미지 리사이징 
       - 리사이징이 완료되면 Spring 서버로 notification api를 호출하여 isCompressed 컬럼 상태를 업데이트
+
+</br></br>
+
 
 # 4. Presigned URL
 
@@ -43,6 +54,8 @@
 
      - GET</br>
        <img src="src/main/resources/static/presigned_url_get.png" alt="structure" width="600"/></br></br>
+
+</br></br>
 
 
 # 5. Reference
